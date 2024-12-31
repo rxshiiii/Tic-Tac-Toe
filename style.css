@@ -1,0 +1,215 @@
+/* General Reset and Font Setup */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Wrapper Styling */
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #cce7ff, #e0b3ff);
+    display: grid;
+    place-items: center;
+}
+
+/* Game Information Styling */
+.game-info {
+    color: #333;
+    position: absolute;
+    font-weight: bold;
+    top: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Tic-Tac-Toe Board Styling */
+.tic-tac-toe {
+    width: 90%;
+    max-width: 25rem;
+    margin-bottom: 50px;
+    border-radius: 1rem;
+    background-color: #f7f7f7;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; /* Adds space between the boxes */
+    padding: 1rem;
+    aspect-ratio: 1 / 1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border: 4px solid #dcdcdc;
+}
+
+/* Grid Box Styling */
+.box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    transition: transform 0.2s, background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    
+}
+
+.box:hover {
+    transform: scale(1.05);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Styling for X and O with Transition */
+.box::before,
+.box::after {
+    content: "";
+    font-size: 3rem;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.box.x::before {
+    content: "X";
+    color: #ff7f50; /* Coral color for X */
+    opacity: 1;
+    transform: scale(1);
+    animation: pop 0.3s ease-in-out;
+}
+
+.box.o::before {
+    content: "O";
+    color: #4682b4; /* Steel blue color for O */
+    opacity: 1;
+    transform: scale(1);
+    animation: pop 0.3s ease-in-out;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Specific Borders for Grid */
+.box1, .box2, .box4, .box5 {
+    border-right: 3px solid #dcdcdc;
+    border-bottom: 3px solid #dcdcdc;
+}
+.box3, .box6 {
+    border-bottom: 3px solid #dcdcdc;
+}
+.box7, .box8 {
+    border-right: 3px solid #dcdcdc;
+}
+
+/* Winning Boxes */
+.win {
+    background-color: rgb(2, 249, 10);
+    animation: glow 0.5s ease-in-out infinite alternate; /* Adjusted to smoothen the effect */
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 4px 0px rgb(2, 249, 10);
+    }
+    20% {
+        box-shadow: 0 0 4px 1px rgb(2, 249, 10);
+    }
+    40% {
+        box-shadow: 0 0 4px 1.5px rgb(2, 249, 10);
+    }
+    60% {
+        box-shadow: 0 0 4px 2px rgb(2, 249, 10);
+    }
+    80% {
+        box-shadow: 0 0 4px 2.5px rgb(2, 249, 10);
+    }
+    100% {
+        box-shadow: 0 0 4px 3px rgb(2, 249, 10);
+    }
+}
+
+/* Tie Effect - Board shake when there is a tie */
+.tie {
+    animation: shake 1s ease-out;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(2deg);
+    }
+    50% {
+        transform: rotate(-2deg);
+    }
+    75% {
+        transform: rotate(2deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* New Game Button Styling */
+.btn {
+    color: #fff;
+    position: absolute;
+    border-radius: 1rem;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4682b4;
+    font-weight: bold;
+    padding: 1rem 3rem;
+    border: none;
+    cursor: pointer;
+    display: none;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.3s;
+    margin-bottom: 50px;
+}
+
+.btn.active {
+    display: flex;
+}
+
+.btn:hover {
+    background-color: #5a9bd5;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Optional: add a shadow to enhance the hover effect */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-info {
+        font-size: 1rem;
+        padding: 0.5rem 2rem;
+    }
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 2rem;
+    }
+    .box {
+        font-size: 2.5rem;
+    }
+}
